@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ecfb128a3b69c4ea3c59e1396579d2, type: 3}
+  m_Name: The Mine
+  m_EditorClassIdentifier: 
+  description: You have dug deep enough to unearth a mine entrance. Unlocks The Mine.
+    The Mine Button is in the start scene.
+  level: 0
+  basePrice: 250
+  scaling: 1
+  effect: 0
+  currencyAffected: 
+  isMulti: 0
+  levelCap: 1

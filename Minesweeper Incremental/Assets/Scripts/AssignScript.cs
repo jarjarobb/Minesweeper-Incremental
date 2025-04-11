@@ -1,0 +1,120 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class AssignScript : MonoBehaviour
+{
+    [SerializeField] Canvas gameCanvas;
+    [SerializeField] List<Button> buttons;
+    [SerializeField] int numOfBombs;
+    [SerializeField] TextMeshProUGUI bombsLeftText;
+    [SerializeField] int bombsLeft;
+    [SerializeField] int nonBombsLeftUnclicked;
+    [SerializeField] int nonBombsClicked;
+    [SerializeField] int bombNum;
+    [SerializeField] int defaultAmountOfCoins = 10;
+    [SerializeField] int totalNonBombTiles;
+    [SerializeField] float defaultWinWaitTime = 0.5f;
+    [SerializeField] List<Button> bombs;
+    // Start is called before the first frame update
+    IEnumerator Start()
+    {
+        
+        bombsLeft = numOfBombs;
+        bombsLeftText.text = bombsLeft.ToString();
+        AddToButtons();
+        yield return new WaitForEndOfFrame();
+        setBomb();
+        StartCoroutine(SetNonBombsLeftUnclicked());
+    }
+
+    private IEnumerator SetNonBombsLeftUnclicked()
+    {
+        yield return new WaitForEndOfFrame();
+        nonBombsLeftUnclicked = gameCanvas.transform.childCount - numOfBombs;
+        totalNonBombTiles = nonBombsLeftUnclicked;
+    }
+    private void AddToButtons()
+    {
+        buttons = FindObjectOfType<Generate>().GetButtons();
+    }
+
+    private void setBomb()
+    {
+        for (int i = 0; i < numOfBombs; i++)
+        {
+            buttons = FindObjectOfType<Generate>().GetButtons();
+            bombNum = Random.Range(0, buttons.Count);
+            if (buttons[bombNum].gameObject.tag != "isBomb")
+            {
+                buttons[bombNum].gameObject.tag = "isBomb";
+            }
+            bombs.Add(buttons[bombNum]);
+        }
+        /*Button[] buttonss = FindObjectsOfType<Button>();
+        for (int i = 0; i < buttonss.Length; i++)
+        {
+            buttonss[i].CountSurroundingBombs();
+        }*/
+    }
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+    public void Flagged(bool flagging)
+    {
+        if (flagging)
+        {
+            bombsLeft -= 1;
+        }
+        else
+        {
+            bombsLeft += 1;
+        }
+        bombsLeftText.text = bombsLeft.ToString();
+    }
+    public IEnumerator nonBombClicked()
+    {
+        nonBombsLeftUnclicked--;
+        nonBombsClicked++;
+        if (nonBombsLeftUnclicked <= 0)
+        {
+            foreach (var bomb in bombs)
+            {
+                bomb.SilentReveal();
+            }
+            yield return new WaitForSeconds(defaultWinWaitTime);
+            
+            if (SceneManager.GetActiveScene().name == "The Mine Game Scene")
+            {
+                FindObjectOfType<PlayerStats>().GameEnded(defaultAmountOfCoins, nonBombsClicked,true, "crystals");
+                FindObjectOfType<SceneLoader>().LoadTheMineWinScene();
+            }
+            else
+            {
+                FindObjectOfType<PlayerStats>().GameEnded(defaultAmountOfCoins, nonBombsClicked, true, "coins");
+                FindObjectOfType<SceneLoader>().LoadWinScene();
+            }
+        }
+    }
+    public int GetBombNum()
+    {
+        return bombNum;
+    }
+    public int GetButtonsRevealed()
+    {
+        return nonBombsClicked;
+    }
+    public int GetNumOfBombs()
+    {
+        return numOfBombs;
+    }
+    public int GetTotalNonBombs()
+    {
+        return totalNonBombTiles;
+    }
+}
