@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6601485912843138172
+--- !u!1 &8991770546717374788
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1257713666869527853}
-  - component: {fileID: 3423286939611908387}
+  - component: {fileID: 1292055586801231419}
+  - component: {fileID: 1526346363133412557}
   m_Layer: 0
-  m_Name: Generate
+  m_Name: Unlocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1257713666869527853
+--- !u!4 &1292055586801231419
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6601485912843138172}
+  m_GameObject: {fileID: 8991770546717374788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 304.84448, y: 481.18512, z: -3.676159}
+  m_LocalPosition: {x: 382.27554, y: 297.51013, z: -8.15039}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3423286939611908387
+--- !u!114 &1526346363133412557
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6601485912843138172}
+  m_GameObject: {fileID: 8991770546717374788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c902bbd83076874f83d8d9604fe6c4f, type: 3}
+  m_Script: {fileID: 11500000, guid: a74a5327743b342449e64f716c10bfa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldButton: {fileID: 8464752942084858237, guid: 790723d3980af6a4ea21f7debbb88fa5, type: 3}
-  amountOfColumns: 5
-  amountOfRows: 5
-  buttonsCanvas: {fileID: 0}
-  SettingsCanvas: {fileID: 0}
-  align: 
-  largerCoinBoardUpgrade: {fileID: 11400000, guid: 1dc3494c2c8a4a04baaf80e46d8f35af, type: 2}
-  buttons: []
+  mineButton: {fileID: 0}
+  biggerFieldUpgrade: {fileID: 0}
+  mineUpgrade: {fileID: 11400000, guid: 87d59278eff377141bcaacadb5e1dacd, type: 2}
+  coinsPPSUpgrade: {fileID: 11400000, guid: 39116046dffad6b4180a16ea56d497b1, type: 2}

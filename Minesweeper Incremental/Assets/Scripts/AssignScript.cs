@@ -19,15 +19,19 @@ public class AssignScript : MonoBehaviour
     [SerializeField] int totalNonBombTiles;
     [SerializeField] float defaultWinWaitTime = 0.5f;
     [SerializeField] List<Button> bombs;
+    [SerializeField] Upgrade largerCoinBoardUpgrade;
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        
+        if (SceneManager.GetActiveScene().name == "Game Scene")
+        {
+            numOfBombs += 2 * largerCoinBoardUpgrade.GetLevel();
+        }
         bombsLeft = numOfBombs;
         bombsLeftText.text = bombsLeft.ToString();
         AddToButtons();
         yield return new WaitForEndOfFrame();
-        setBomb();
+        SetBombs();
         StartCoroutine(SetNonBombsLeftUnclicked());
     }
 
@@ -41,18 +45,25 @@ public class AssignScript : MonoBehaviour
     {
         buttons = FindObjectOfType<Generate>().GetButtons();
     }
-
-    private void setBomb()
+    private void SetBomb()
+    {
+        buttons = FindObjectOfType<Generate>().GetButtons();
+        bombNum = Random.Range(0, buttons.Count);
+        if (buttons[bombNum].gameObject.tag != "isBomb")
+        {
+            buttons[bombNum].gameObject.tag = "isBomb";
+        }
+        else
+        {
+            SetBomb();
+        }
+        bombs.Add(buttons[bombNum]);
+    }
+    private void SetBombs()
     {
         for (int i = 0; i < numOfBombs; i++)
         {
-            buttons = FindObjectOfType<Generate>().GetButtons();
-            bombNum = Random.Range(0, buttons.Count);
-            if (buttons[bombNum].gameObject.tag != "isBomb")
-            {
-                buttons[bombNum].gameObject.tag = "isBomb";
-            }
-            bombs.Add(buttons[bombNum]);
+            SetBomb();
         }
         /*Button[] buttonss = FindObjectsOfType<Button>();
         for (int i = 0; i < buttonss.Length; i++)

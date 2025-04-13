@@ -402,7 +402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -295, y: 267}
+  m_AnchoredPosition: {x: -300, y: 274.87}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &682505913
@@ -459,8 +459,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -687,6 +687,10 @@ PrefabInstance:
       propertyPath: bombsLeftText
       value: 
       objectReference: {fileID: 1253511955}
+    - target: {fileID: -3061848695170372343, guid: a91b0b0dfd75dee4e85897f78ead7096, type: 3}
+      propertyPath: largerCoinBoardUpgrade
+      value: 
+      objectReference: {fileID: 11400000, guid: 1dc3494c2c8a4a04baaf80e46d8f35af, type: 2}
     - target: {fileID: 7177416368979151263, guid: a91b0b0dfd75dee4e85897f78ead7096, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -815,7 +819,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -149.59, y: 267}
+  m_AnchoredPosition: {x: -154.59, y: 274.87}
   m_SizeDelta: {x: 90.8231, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1253511955
@@ -872,8 +876,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

@@ -25,7 +25,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] Canvas settingsCanvas;
     float coinsMultis = 1;
     string previousScene = "Start Scene";
-    bool coinsProfitPerSquare;
+    [SerializeField]bool coinsProfitPerSquare;
     int baseCoins = 1;
     private void Awake()
     {
@@ -104,7 +104,16 @@ public class PlayerStats : MonoBehaviour
                 coinsDisplay.text = crystals.ToString();
             }
         }
-        
+        foreach (Upgrade upgrade in upgrades)
+        {
+            if (upgrade.name == "Profit Per Square")
+            {
+                if (upgrade.GetLevel() == 1)
+                {
+                    EnableProfitPerSquare("coins");
+                }
+            }
+        }
     }
     public void DimensionCrossed(string dimension)
     {

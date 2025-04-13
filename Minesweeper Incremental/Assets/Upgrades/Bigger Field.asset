@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Bigger Field
   m_EditorClassIdentifier: 
   description: Increases the size of the field by 1 column and one row per level
-    up to a 10x10 square.
-  level: 0
+    up to a 10x10 square. Also increases bombs by 2 per level.
+  currencyNeeded: coins
+  level: 1
   basePrice: 100
   scaling: 5
   effect: 0

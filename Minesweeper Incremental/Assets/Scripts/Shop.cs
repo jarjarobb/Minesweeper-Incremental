@@ -23,16 +23,6 @@ public class Shop : MonoBehaviour
     void Start()
     {
         coins = FindObjectOfType<PlayerStats>().GetCoins();
-        foreach(Upgrade upgrade in upgrades)
-        {
-            if (upgrade.name == "Profit Per Square")
-            {
-                if (upgrade.GetLevel() == 1)
-                {
-                    FindObjectOfType<PlayerStats>().EnableProfitPerSquare("coins");
-                }
-            }
-        }
     }
 
     // Update is called once per frame
@@ -55,7 +45,18 @@ public class Shop : MonoBehaviour
     {
         if (selectedUpgrade != null)
         {
-            UpdateMoreDetails(upgrade, false);
+            if (selectedUpgrade == upgrade)
+            {
+                UpdateMoreDetails(upgrade, true);
+            }
+            else if (selectedUpgrade != upgrade && !upgradeCanvas.isActiveAndEnabled)
+            {
+                UpdateMoreDetails(upgrade, true);
+            }
+            else
+            {
+                UpdateMoreDetails(upgrade, false);
+            }
         }
         else
         {
@@ -104,9 +105,7 @@ public class Shop : MonoBehaviour
     }
     public void BuyUpgrade()
     {
-        print("upgrade bought");
         UpdatePlayerCoins(FindObjectOfType<PlayerStats>().GetCoins(), "coins");
-        UpdatePlayerCoins(FindObjectOfType<PlayerStats>().GetCrystals(), "crystals");
         if ((float)coins >= selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel()))
         {
             
@@ -115,6 +114,22 @@ public class Shop : MonoBehaviour
             {
                 
                 FindObjectOfType<PlayerStats>().GameEnded(Mathf.RoundToInt(selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel())),0, false, "coins");
+                selectedUpgrade.LevelUp();
+                UpdateMoreDetails(selectedUpgrade, false);
+            }
+        }
+    }
+    public void BuyCrystalUpgrade()
+    {
+        UpdatePlayerCoins(FindObjectOfType<PlayerStats>().GetCrystals(), "crystals");
+        if ((float)crystals >= selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel()))
+        {
+            
+            // level cap -1 means uncapped
+            if (selectedUpgrade.GetLevel() + 1 <= selectedUpgrade.GetLevelCap() || selectedUpgrade.GetLevelCap() == -1)
+            {
+                
+                FindObjectOfType<PlayerStats>().GameEnded(Mathf.RoundToInt(selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel())),0, false, "crystals");
                 selectedUpgrade.LevelUp();
                 UpdateMoreDetails(selectedUpgrade, false);
             }

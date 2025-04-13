@@ -6,8 +6,9 @@ using System;
 [CreateAssetMenu(menuName = "Upgrade")]
 public class Upgrade : ScriptableObject
 {
-
+    
     [SerializeField] string description;
+    [SerializeField] string currencyNeeded;
     [SerializeField] int level;
     [SerializeField] int basePrice;
     [SerializeField] float scaling;
@@ -34,6 +35,7 @@ public class Upgrade : ScriptableObject
     public string GetCurrencyAffected() { return currencyAffected; }
     public bool GetIsMulti() { return isMulti; }
     public int GetLevelCap() { return levelCap; }
+    public string GetCurrencyNeeded() { return currencyNeeded; }
 
     public void LevelUp()
     {

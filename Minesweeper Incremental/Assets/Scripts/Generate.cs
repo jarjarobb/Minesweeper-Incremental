@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class Generate : MonoBehaviour
 {
@@ -11,9 +12,7 @@ public class Generate : MonoBehaviour
     [SerializeField] Transform buttonsCanvas;
     [SerializeField] Canvas SettingsCanvas;
     [SerializeField] string align;
-    [SerializeField] Upgrade largerBoardUpgrade;
-    Color mineGreen1 = new Color(0, 255, 0);
-    Color mineGreen2 = new Color(0, 120, 0);
+    [SerializeField] Upgrade largerCoinBoardUpgrade;
     float buttonOffset = 25;
     float buttonDistance = 37.5f;
     Button newButton;
@@ -23,8 +22,11 @@ public class Generate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        amountOfColumns += largerBoardUpgrade.GetLevel();
-        amountOfRows = amountOfColumns;
+        if (SceneManager.GetActiveScene().name == "Game Scene")
+        {
+            amountOfColumns += largerCoinBoardUpgrade.GetLevel();
+            amountOfRows = amountOfColumns;
+        }
         GenerateBoard();
         
     }
@@ -48,6 +50,7 @@ public class Generate : MonoBehaviour
     }
     private void GenerateBoard()
     {
+        
         if (align == "center")
         {
             
