@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Numerics;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
@@ -13,7 +14,10 @@ public class Shop : MonoBehaviour
     [SerializeField] TextMeshProUGUI levelLabel;
     [SerializeField] TextMeshProUGUI priceLabel;
     [SerializeField] TextMeshProUGUI effectLabel;
+    [SerializeField] Image currencyNeededImage;
     [SerializeField] Upgrade[] upgrades;
+    [SerializeField] Sprite coinImage;
+    [SerializeField] Sprite crystalImage;
     
     Upgrade selectedUpgrade;
     BigInteger coins;
@@ -97,6 +101,14 @@ public class Shop : MonoBehaviour
         {
             effectLabel.text = "";
         }
+        if (upgrade.GetCurrencyNeeded() == "coins")
+        {
+            currencyNeededImage.sprite = coinImage;
+        }
+        else if (upgrade.GetCurrencyNeeded() == "crystals")
+        {
+            currencyNeededImage.sprite = crystalImage;
+        }
         selectedUpgrade = upgrade;
         if (changeVisibility)
         {
@@ -105,18 +117,25 @@ public class Shop : MonoBehaviour
     }
     public void BuyUpgrade()
     {
-        UpdatePlayerCoins(FindObjectOfType<PlayerStats>().GetCoins(), "coins");
-        if ((float)coins >= selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel()))
+        if (selectedUpgrade.GetCurrencyNeeded() == "coins")
         {
-            
-            // level cap -1 means uncapped
-            if (selectedUpgrade.GetLevel() + 1 <= selectedUpgrade.GetLevelCap() || selectedUpgrade.GetLevelCap() == -1)
+            UpdatePlayerCoins(FindObjectOfType<PlayerStats>().GetCoins(), "coins");
+            if ((float)coins >= selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel()))
             {
-                
-                FindObjectOfType<PlayerStats>().GameEnded(Mathf.RoundToInt(selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel())),0, false, "coins");
-                selectedUpgrade.LevelUp();
-                UpdateMoreDetails(selectedUpgrade, false);
+
+                // level cap -1 means uncapped
+                if (selectedUpgrade.GetLevel() + 1 <= selectedUpgrade.GetLevelCap() || selectedUpgrade.GetLevelCap() == -1)
+                {
+
+                    FindObjectOfType<PlayerStats>().GameEnded(Mathf.RoundToInt(selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel())), 0, false, "coins");
+                    selectedUpgrade.LevelUp();
+                    UpdateMoreDetails(selectedUpgrade, false);
+                }
             }
+        }
+        else if (selectedUpgrade.GetCurrencyNeeded() == "crystals")
+        {
+            BuyCrystalUpgrade();
         }
     }
     public void BuyCrystalUpgrade()

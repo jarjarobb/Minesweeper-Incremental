@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-    BigInteger coins = 250;
+    BigInteger coins = 0;
     BigInteger crystals = 0;
     [SerializeField] int crystal;
     [SerializeField] TextMeshProUGUI coinsDisplay;
@@ -23,7 +23,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] string[] suffixes = { "", "K", "M", "B", "T", "Qa" };
     [SerializeField] UnityEngine.UI.Button settingsButton;
     [SerializeField] Canvas settingsCanvas;
-    float coinsMultis = 1;
+    [SerializeField]float coinsMultis = 1;
+    [SerializeField] Canvas statsCanvas;
+    [SerializeField] TextMeshProUGUI statsCoinsDisplay;
+    [SerializeField] TextMeshProUGUI statsCrystalsDisplay;
     string previousScene = "Start Scene";
     [SerializeField]bool coinsProfitPerSquare;
     int baseCoins = 1;
@@ -66,12 +69,15 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
-    public void HideSettingsButton()
+    public void HideSettingsButton(bool showSettings)
     {
         settingsButton.gameObject.SetActive(false);
-        for(int i = 0; i < settingsCanvas.transform.childCount; i++)
+        if (showSettings)
         {
-            settingsCanvas.transform.GetChild(i).gameObject.SetActive(true);
+            for (int i = 0; i < settingsCanvas.transform.childCount; i++)
+            {
+                settingsCanvas.transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
     }
     public void ShowSettingsButton()
@@ -87,11 +93,11 @@ public class PlayerStats : MonoBehaviour
         ChangeCurrencyDisplay(currentDisplayCurrency);
         if (coins != 0 && currentDisplayCurrency == "coins")
         {
-            UpdateDisplay();
+            UpdateDisplay(true);
         }
         else if (crystals != 0 && currentDisplayCurrency == "crystals")
         {
-            UpdateDisplay();
+            UpdateDisplay(true);
         }
         else
         {
@@ -191,32 +197,46 @@ public class PlayerStats : MonoBehaviour
                 crystals -= (int)((float)addToCoinsAmount);
             }
         }
-        UpdateDisplay();
+        UpdateDisplay(false);
     }
-    private void UpdateDisplay()
+    public void ChangeStatsVisibility()
     {
+        statsCanvas.gameObject.SetActive(!statsCanvas.gameObject.activeSelf);
+    }
+    private void UpdateDisplay(bool changeIcon)
+    {
+        statsCoinsDisplay.text = CheckForSuffix((float)coins, false);
+        statsCrystalsDisplay.text = CheckForSuffix((float)crystals, false);
+
         print("updated display");
         if (currentDisplayCurrency == "coins")
         {
-            currencyImageDisplay.overrideSprite = coinsImage;
-            currencyDisplay.text = CheckForSuffix((float)coins, false);
+                currencyImageDisplay.overrideSprite = coinsImage;
+                currencyDisplay.text = CheckForSuffix((float)coins, false);
+            
+
         }
         else if (currentDisplayCurrency == "crystals")
         {
-            currencyImageDisplay.overrideSprite = coinsImage;
-            currencyDisplay.text = CheckForSuffix((float)coins, false);
+            
+                currencyImageDisplay.overrideSprite = crystalImage;
+                currencyDisplay.text = CheckForSuffix((float)crystals, false);
+            
         }
         else if (currentDisplayCurrency == "automatic")
         {
             if (currentDimension == "normal")
             {
-                currencyImageDisplay.overrideSprite = coinsImage;
+                
+                    currencyImageDisplay.overrideSprite = coinsImage;
+                
                 currencyDisplay.text = CheckForSuffix((float)coins, false);
             }
             else if (currentDimension == "the mine")
             {
                 
-                currencyImageDisplay.overrideSprite = crystalImage;
+                    currencyImageDisplay.overrideSprite = crystalImage;
+               
                 currencyDisplay.text = CheckForSuffix((float)crystals, false);
             }
         }
@@ -240,6 +260,7 @@ public class PlayerStats : MonoBehaviour
 
     private void GetEffectMulti(string currency)
     {
+        coinsMultis = 1;
         for (int i = 0; i < upgrades.Length; i++)
         {
             var upgrade = upgrades[i];
@@ -249,7 +270,7 @@ public class PlayerStats : MonoBehaviour
                 if (currencyAffected.ToLower() == currency)
                 {
                     float effect = upgrade.GetEffect();
-                    coinsMultis = Mathf.Pow(effect, upgrade.GetLevel());
+                    coinsMultis *= Mathf.Pow(effect, upgrade.GetLevel());
                 }
             }
         }

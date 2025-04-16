@@ -47,12 +47,13 @@ public class SceneLoader : MonoBehaviour
     public void LoadSettings()
     {
         FindObjectOfType<PlayerStats>().StorePreviousScene(SceneManager.GetActiveScene().name);
-        FindObjectOfType<PlayerStats>().HideSettingsButton();
+        FindObjectOfType<PlayerStats>().HideSettingsButton(true);
         SceneManager.LoadScene("Settings");
     }
     public void LoadShop()
     {
         FindObjectOfType<PlayerStats>().StorePreviousScene(SceneManager.GetActiveScene().name);
+        FindObjectOfType<PlayerStats>().HideSettingsButton(false);
         SceneManager.LoadScene("Shop");
     }
     public void LoadInstructions()
