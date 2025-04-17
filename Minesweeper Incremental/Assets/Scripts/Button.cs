@@ -18,6 +18,7 @@ public class Button : MonoBehaviour
     [SerializeField] Sprite flagTexture;
     [SerializeField] Sprite bombTexture;
     [SerializeField] Sprite rockTexture;
+    [SerializeField] Sprite diamondTexture;
     [SerializeField] float bombRevealDelayTime = 0.5f;
     Sprite defaultTexture;
     [SerializeField]int currentRow;
@@ -47,6 +48,11 @@ public class Button : MonoBehaviour
         {
             GetComponent<Image>().sprite = bombTexture;
             return;
+        }
+        if (tag == "isDiamond")
+        {
+            GetComponent<Image>().sprite = diamondTexture;
+            FindObjectOfType<PlayerStats>().AwardDiamond();
         }
         for (int i = 0; i < buttons.transform.childCount; i++)
         {

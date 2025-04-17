@@ -15,10 +15,12 @@ public class AssignScript : MonoBehaviour
     [SerializeField] int nonBombsLeftUnclicked;
     [SerializeField] int nonBombsClicked;
     [SerializeField] int bombNum;
+    [SerializeField] int diamondNum;
     [SerializeField] int defaultAmountOfCoins = 10;
     [SerializeField] int totalNonBombTiles;
     [SerializeField] float defaultWinWaitTime = 0.5f;
     [SerializeField] List<Button> bombs;
+    [SerializeField] Button diamond;
     [SerializeField] Upgrade largerCoinBoardUpgrade;
     // Start is called before the first frame update
     IEnumerator Start()
@@ -32,7 +34,30 @@ public class AssignScript : MonoBehaviour
         AddToButtons();
         yield return new WaitForEndOfFrame();
         SetBombs();
+        SetDiamond();
         StartCoroutine(SetNonBombsLeftUnclicked());
+    }
+
+    private void SetDiamond()
+    {
+        if (SceneManager.GetActiveScene().name == "The Mine Game Scene")
+        {
+            int chance = Random.Range(1, 5);
+            if (chance == 1)
+            {
+                buttons = FindObjectOfType<Generate>().GetButtons();
+                diamondNum = Random.Range(0, buttons.Count);
+                if (buttons[diamondNum].gameObject.tag != "isDiamond")
+                {
+                    buttons[diamondNum].gameObject.tag = "isDiamond";
+                }
+                else
+                {
+                    SetDiamond();
+                }
+                diamond = buttons[diamondNum];
+            }
+        }
     }
 
     private IEnumerator SetNonBombsLeftUnclicked()

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-    BigInteger coins = 0;
-    BigInteger crystals = 0;
-    [SerializeField] int crystal;
+    BigInteger coins = 1000000000;
+    BigInteger crystals = 100000000;
+    [SerializeField] int diamonds;
     [SerializeField] TextMeshProUGUI coinsDisplay;
     [SerializeField] TextMeshProUGUI crystalsDisplay;
     [SerializeField] Sprite coinsImage;
@@ -33,6 +33,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] bool crystalsPPS;
     [SerializeField] bool crystalsEL;
     int baseCoins = 1;
+
     private void Awake()
     {
         int NumberOfPlayerStatuses = FindObjectsOfType<PlayerStats>().Length;
@@ -44,6 +45,10 @@ public class PlayerStats : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+    }
+    public void AwardDiamond()
+    {
+        diamonds++;
     }
     public void ChangeCurrencyDisplay(string currency)
     {
@@ -202,7 +207,6 @@ public class PlayerStats : MonoBehaviour
     }
     private void Update()
     {
-        crystal = (int)crystals;
     }
     public void GameEnded(int addToCoinsAmount, int squaresRevealed, bool addOrSpend, string currency)
     {
@@ -389,5 +393,14 @@ public class PlayerStats : MonoBehaviour
         {
             return ((float)amount / Mathf.Pow(10, (suffixIndex * 3))).ToString() + suffix;
         }
+    }
+
+    public int GetDiamonds()
+    {
+        return diamonds;
+    }
+    public void SpendDiamond()
+    {
+        diamonds--;
     }
 }

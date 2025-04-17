@@ -336,5 +336,6 @@ MonoBehaviour:
   flagTexture: {fileID: 21300000, guid: c8117657bc0dcda4aaed12b051625459, type: 3}
   bombTexture: {fileID: 21300000, guid: 3f8f91496123b0a4d8fd36bd57883101, type: 3}
   rockTexture: {fileID: 21300000, guid: b3f2bba25d1f9a248ab4692869df14c9, type: 3}
+  diamondTexture: {fileID: 21300000, guid: ea13ff9bc40177945a8eba398ef30c00, type: 3}
   bombRevealDelayTime: 0.5
   currentRow: 0

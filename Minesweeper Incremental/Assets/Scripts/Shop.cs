@@ -18,10 +18,12 @@ public class Shop : MonoBehaviour
     [SerializeField] Upgrade[] upgrades;
     [SerializeField] Sprite coinImage;
     [SerializeField] Sprite crystalImage;
+    [SerializeField] Sprite diamondImage;
     
     Upgrade selectedUpgrade;
     BigInteger coins;
     BigInteger crystals;
+    int diamonds;
     
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,10 @@ public class Shop : MonoBehaviour
         else if (currency == "crystals")
         {
             crystals = newAmount;
+        }
+        else if (currency == "diamonds")
+        {
+            diamonds = (int)newAmount;
         }
     }
     public void ExpandButtonClicked(Upgrade upgrade)
@@ -95,10 +101,16 @@ public class Shop : MonoBehaviour
         {
             levelLabel.text = upgrade.GetLevel().ToString() + " / " + upgrade.GetLevelCap().ToString();
         }
-        float effect = Mathf.Pow(upgrade.GetEffect(), upgrade.GetLevel());
+        
         if (upgrade.GetIsMulti())
         {
+            float effect = Mathf.Pow(upgrade.GetEffect(), upgrade.GetLevel());
             print(effect);
+            effectLabel.text = "Effect: x" + FindObjectOfType<PlayerStats>().CheckForSuffix(effect, true);
+        }
+        if (upgrade.GetIsAdder())
+        {
+            float effect = 1+upgrade.GetEffect() *upgrade.GetLevel();
             effectLabel.text = "Effect: x" + FindObjectOfType<PlayerStats>().CheckForSuffix(effect, true);
         }
         else
@@ -112,6 +124,10 @@ public class Shop : MonoBehaviour
         else if (upgrade.GetCurrencyNeeded() == "crystals")
         {
             currencyNeededImage.sprite = crystalImage;
+        }
+        else if (upgrade.GetCurrencyNeeded() == "diamonds")
+        {
+            currencyNeededImage.sprite = diamondImage;
         }
         selectedUpgrade = upgrade;
         if (changeVisibility)
@@ -140,6 +156,26 @@ public class Shop : MonoBehaviour
         else if (selectedUpgrade.GetCurrencyNeeded() == "crystals")
         {
             BuyCrystalUpgrade();
+        }
+        else if (selectedUpgrade.GetCurrencyNeeded() == "diamonds")
+        {
+            BuyDiamondUpgrade();
+        }
+    }
+    public void BuyDiamondUpgrade()
+    {
+        UpdatePlayerCoins((BigInteger)FindObjectOfType<PlayerStats>().GetDiamonds(), "diamonds");
+        if ((float)diamonds >= selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel()))
+        {
+            
+            // level cap -1 means uncapped
+            if (selectedUpgrade.GetLevel() + 1 <= selectedUpgrade.GetLevelCap() || selectedUpgrade.GetLevelCap() == -1)
+            {
+
+                FindObjectOfType<PlayerStats>().SpendDiamond();
+                selectedUpgrade.LevelUp();
+                UpdateMoreDetails(selectedUpgrade, false);
+            }
         }
     }
     public void BuyCrystalUpgrade()
