@@ -15,6 +15,7 @@ public class Upgrade : ScriptableObject
     [SerializeField] float effect;
     [SerializeField] string currencyAffected;
     [SerializeField] bool isMulti;
+    [SerializeField] bool isAdder;
     [SerializeField] int levelCap;
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class Upgrade : ScriptableObject
     public bool GetIsMulti() { return isMulti; }
     public int GetLevelCap() { return levelCap; }
     public string GetCurrencyNeeded() { return currencyNeeded; }
+    public bool GetIsAdder() { return isAdder; }
 
     public void LevelUp()
     {

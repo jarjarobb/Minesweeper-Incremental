@@ -76,6 +76,10 @@ public class Shop : MonoBehaviour
         {
             FindObjectOfType<PlayerStats>().EnableProfitPerSquare("coins");
         }
+        if (upgrade.name == "Coins Everlasting")
+        { 
+            FindObjectOfType<PlayerStats>().EnableEL("coins");
+        }
         descriptionLabel.text = upgrade.GetDescription();
         BigInteger price = (BigInteger)(upgrade.GetPrice() * Mathf.Pow(upgrade.GetScaling(), upgrade.GetLevel()));
         priceLabel.text = FindObjectOfType<PlayerStats>().CheckForSuffix((float)price, false);

@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ecfb128a3b69c4ea3c59e1396579d2, type: 3}
   m_Name: Crystals
   m_EditorClassIdentifier: 
-  description: Increases Crystals earned by 1.1x per level.
+  description: Increases base Crystals earned by 10% (linear) perr level.
   currencyNeeded: coins
   level: 0
   basePrice: 100
   scaling: 1.35
-  effect: 1.1
+  effect: 0.1
   currencyAffected: crystals
-  isMulti: 1
+  isMulti: 0
+  isAdder: 1
   levelCap: -1

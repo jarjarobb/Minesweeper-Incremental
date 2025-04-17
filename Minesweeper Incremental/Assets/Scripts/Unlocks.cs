@@ -10,6 +10,10 @@ public class Unlocks : MonoBehaviour
     [SerializeField] GameObject biggerFieldUpgrade;
     [SerializeField] Upgrade mineUpgrade;
     [SerializeField] Upgrade coinsPPSUpgrade;
+    [SerializeField] GameObject moreCoinsIIUpgrade;
+    [SerializeField] GameObject crystalsUpgrade;
+    [SerializeField] GameObject coinsELUpgrade;
+    [SerializeField] Upgrade crystalsPPSUpgrade;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +38,12 @@ public class Unlocks : MonoBehaviour
         if (coinsPPSUpgrade.GetLevel() == 1)
         {
             biggerFieldUpgrade.SetActive(true);
+        }
+        if (mineUpgrade.GetLevel()==1)
+        {
+            moreCoinsIIUpgrade.SetActive(true);
+            crystalsUpgrade.SetActive(true);
+            coinsELUpgrade.SetActive(true);
         }
     }
     // Update is called once per frame
