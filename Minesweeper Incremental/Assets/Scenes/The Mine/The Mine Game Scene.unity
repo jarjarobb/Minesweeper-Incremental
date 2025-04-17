@@ -339,25 +339,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3423286939611908387, guid: f98a04f6084c0bd4fa693ec12cea91ed, type: 3}
-      propertyPath: align
-      value: center
-      objectReference: {fileID: 0}
-    - target: {fileID: 3423286939611908387, guid: f98a04f6084c0bd4fa693ec12cea91ed, type: 3}
-      propertyPath: fieldButton
-      value: 
-      objectReference: {fileID: 8464752942084858237, guid: f51545c410077d8459fbe81b067fc733, type: 3}
-    - target: {fileID: 3423286939611908387, guid: f98a04f6084c0bd4fa693ec12cea91ed, type: 3}
-      propertyPath: amountOfRows
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3423286939611908387, guid: f98a04f6084c0bd4fa693ec12cea91ed, type: 3}
       propertyPath: buttonsCanvas
       value: 
       objectReference: {fileID: 257049066}
-    - target: {fileID: 3423286939611908387, guid: f98a04f6084c0bd4fa693ec12cea91ed, type: 3}
-      propertyPath: amountOfColumns
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6601485912843138172, guid: f98a04f6084c0bd4fa693ec12cea91ed, type: 3}
       propertyPath: m_Name
       value: Generate

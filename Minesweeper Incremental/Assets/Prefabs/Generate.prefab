@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3423286939611908387
 MonoBehaviour:
@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c902bbd83076874f83d8d9604fe6c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldButton: {fileID: 8464752942084858237, guid: 790723d3980af6a4ea21f7debbb88fa5, type: 3}
+  fieldButton: {fileID: 8464752942084858237, guid: f51545c410077d8459fbe81b067fc733, type: 3}
   amountOfColumns: 5
   amountOfRows: 5
   buttonsCanvas: {fileID: 0}
   SettingsCanvas: {fileID: 0}
-  align: 
+  align: center
   largerCoinBoardUpgrade: {fileID: 11400000, guid: 1dc3494c2c8a4a04baaf80e46d8f35af, type: 2}
+  largerCrystalBoardUpgrade: {fileID: 11400000, guid: f56fe0f33d11fe948ad3ef3795f589ba, type: 2}
   buttons: []

@@ -13,6 +13,7 @@ public class Generate : MonoBehaviour
     [SerializeField] Canvas SettingsCanvas;
     [SerializeField] string align;
     [SerializeField] Upgrade largerCoinBoardUpgrade;
+    [SerializeField] Upgrade largerCrystalBoardUpgrade;
     float buttonOffset = 25;
     float buttonDistance = 37.5f;
     Button newButton;
@@ -25,6 +26,11 @@ public class Generate : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Game Scene")
         {
             amountOfColumns += largerCoinBoardUpgrade.GetLevel();
+            amountOfRows = amountOfColumns;
+        }
+        if (SceneManager.GetActiveScene().name == "The Mine Game Scene")
+        {
+            amountOfColumns += largerCrystalBoardUpgrade.GetLevel();
             amountOfRows = amountOfColumns;
         }
         GenerateBoard();
