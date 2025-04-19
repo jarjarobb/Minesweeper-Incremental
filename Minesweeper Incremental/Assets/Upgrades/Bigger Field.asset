@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ecfb128a3b69c4ea3c59e1396579d2, type: 3}
   m_Name: Bigger Field
   m_EditorClassIdentifier: 
-  description: Increases the size of the coin field by 1 column and one row per level
-    up to a 10x10 square. Also increases bombs by 2 per level.
+  description: 'Increases the size of the coin field by 1 column and one row per
+    level up to a 10x10 square. Also increases bombs by 2 per level, and coins by
+    2x per level. THIS UPGRADE IS NECESSARY TO PROGRESSION '
   currencyNeeded: coins
   level: 0
   basePrice: 100
   scaling: 5
-  effect: 0
-  currencyAffected: 
-  isMulti: 0
+  effect: 2
+  currencyAffected: coins
+  isMulti: 1
+  isAdder: 0
   levelCap: 5

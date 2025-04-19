@@ -6,22 +6,15 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     [SerializeField] int minePrice = 25;
+    [SerializeField] int heavenPrice = 1;
     
-    // Start is called before the first frame update
-    void Start()
-    {
+    // This whole script deals with scene loading
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void LoadLoseScene()
     {
         SceneManager.LoadScene("Lose Scene");
     }
+    //this function is ran with true if you want to load the previous scene
     public void LoadStartScene(bool loadPreviousScene)
     {
         FindObjectOfType<PlayerStats>().ShowSettingsButton();
@@ -46,12 +39,14 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadSettings()
     {
+        //sets the scene before entering settings, and hides the settings button to prevent softlock
         FindObjectOfType<PlayerStats>().StorePreviousScene(SceneManager.GetActiveScene().name);
         FindObjectOfType<PlayerStats>().HideSettingsButton(true);
         SceneManager.LoadScene("Settings");
     }
     public void LoadShop()
     {
+        //sets the scene before entering the shop, and hides the settings button to prevent softlock
         FindObjectOfType<PlayerStats>().StorePreviousScene(SceneManager.GetActiveScene().name);
         FindObjectOfType<PlayerStats>().HideSettingsButton(false);
         SceneManager.LoadScene("Shop");
@@ -62,11 +57,11 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadTheMineStartScene(bool crossDimension)
     {
-       
+       // makes you pay if you are crossing a dimension
         if (FindObjectOfType<PlayerStats>().GetCoins() >= minePrice && crossDimension)
         {
             FindObjectOfType<PlayerStats>().DimensionCrossed("The Mine");
-            FindObjectOfType<PlayerStats>().GameEnded(25,0, false, "coins");
+            FindObjectOfType<PlayerStats>().GameEnded(minePrice,0, false, "coins");
             SceneManager.LoadScene("The Mine Start Scene");
         }
         else if (!crossDimension)
@@ -86,4 +81,32 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("The Mine Lose Scene");
     }
+    public void LoadHeavenStartScene(bool crossDimension)
+    {
+        //makes you pay if you are crossing a dimension
+        if (FindObjectOfType<PlayerStats>().GetDiamonds() >= heavenPrice && crossDimension)
+        {
+            FindObjectOfType<PlayerStats>().DimensionCrossed("Heaven");
+            FindObjectOfType<PlayerStats>().SpendDiamond();
+            SceneManager.LoadScene("Heaven Start Scene");
+        }
+        else if (!crossDimension)
+        {
+            SceneManager.LoadScene("Heaven Start Scene");
+        }
+    }
+    public void LoadHeavenGameScene()
+    {
+        SceneManager.LoadScene("Heaven Game Scene");
+    }
+    public void LoadHeavenWinScene()
+    {
+        SceneManager.LoadScene("Heaven Win Scene");
+    }
+    public void LoadHeavenLoseScene()
+    {
+        SceneManager.LoadScene("Heaven Lose Scene");
+    }
 }
+
+

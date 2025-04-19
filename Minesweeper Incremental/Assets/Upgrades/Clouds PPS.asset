@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9ecfb128a3b69c4ea3c59e1396579d2, type: 3}
-  m_Name: THE KEY
+  m_Name: Clouds PPS
   m_EditorClassIdentifier: 
-  description: 'THE FINAL PIECE OF THE PORTAL. REQUIRES THE SPECIAL GEM FOUND IN
-    THE MINE TO ACTIVATE. THE GEM HAS A 25% CHANCE OF SPAWNING EVERY GAME IN THE
-    MINE. UNLOCKS A NEW AREA AND MORE UPGRADES. '
-  currencyNeeded: diamonds
+  description: Clouds are now based off of squares revealed instead of percentage
+    of squares revealed. Unlocks new upgrades.
+  currencyNeeded: clouds
   level: 0
-  basePrice: 1
+  basePrice: 50
   scaling: 1
   effect: 0
   currencyAffected: 

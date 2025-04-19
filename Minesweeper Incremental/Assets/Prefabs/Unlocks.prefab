@@ -45,6 +45,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mineButton: {fileID: 0}
-  biggerFieldUpgrade: {fileID: 0}
-  mineUpgrade: {fileID: 11400000, guid: 87d59278eff377141bcaacadb5e1dacd, type: 2}
   coinsPPSUpgrade: {fileID: 11400000, guid: 39116046dffad6b4180a16ea56d497b1, type: 2}
+  biggerField: {fileID: 0}
+  mineUpgrade: {fileID: 11400000, guid: 87d59278eff377141bcaacadb5e1dacd, type: 2}
+  moreCoinsII: {fileID: 0}
+  moreCrystals: {fileID: 0}
+  coinsEL: {fileID: 0}
+  crystalsPPS: {fileID: 0}
+  portalCoins: {fileID: 0}
+  portalCrystals: {fileID: 0}
+  crystalsPPSUpgrade: {fileID: 11400000, guid: 8175169e397063d44a778c4f97a229fa, type: 2}
+  biggerFieldII: {fileID: 0}
+  portalCoinsUpgrade: {fileID: 11400000, guid: dd8de2207052c8549ae7ce73f82b3b89, type: 2}
+  portalCrystalsUpgrade: {fileID: 11400000, guid: 563d570fb79d1224c817c0fb8da83fd1, type: 2}
+  portalKey: {fileID: 0}
+  portalKeyUpgrade: {fileID: 11400000, guid: a5d8958f651470841a3807eaa4b94a56, type: 2}
+  coinsELUpgrade: {fileID: 11400000, guid: d75d6d68dab0b32428a09c1ff21efdc4, type: 2}
+  crystalsELUpgrade: {fileID: 11400000, guid: a42c6d299d5682941b5e72e5ab0e06a8, type: 2}
+  cloudsPPSUpgrade: {fileID: 11400000, guid: 593abd6d711878a4faa2981fb3b3743f, type: 2}
+  cloudsELUpgrade: {fileID: 11400000, guid: c6228a22e962af44691013328ecadc70, type: 2}

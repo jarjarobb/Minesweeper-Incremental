@@ -5,9 +5,13 @@ using TMPro;
 using System;
 using System.Numerics;
 using UnityEngine.UI;
+using UnityEditor.VersionControl;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class Shop : MonoBehaviour
 {
+    //This script deals with operating the shop
+
     [SerializeField] Canvas upgradeCanvas;
     [SerializeField] TextMeshProUGUI nameLabel;
     [SerializeField] TextMeshProUGUI descriptionLabel;
@@ -19,23 +23,22 @@ public class Shop : MonoBehaviour
     [SerializeField] Sprite coinImage;
     [SerializeField] Sprite crystalImage;
     [SerializeField] Sprite diamondImage;
+    [SerializeField] Sprite cloudImage;
     
     Upgrade selectedUpgrade;
     BigInteger coins;
     BigInteger crystals;
+    BigInteger clouds;
     int diamonds;
     
+
     // Start is called before the first frame update
     void Start()
     {
+        //Sets the initial value of coins
         coins = FindObjectOfType<PlayerStats>().GetCoins();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void UpdatePlayerCoins(BigInteger newAmount, string currency)
     {
         if (currency == "coins")
@@ -50,9 +53,15 @@ public class Shop : MonoBehaviour
         {
             diamonds = (int)newAmount;
         }
+        else if (currency == "clouds")
+        {
+            clouds = newAmount;
+        }
     }
+    //What happens when the expand button of an upgrade is clicked
     public void ExpandButtonClicked(Upgrade upgrade)
     {
+        //updates the details canvas based on if the selected upgrade is null and if the selcted upgrade is the same
         if (selectedUpgrade != null)
         {
             if (selectedUpgrade == upgrade)
@@ -73,19 +82,11 @@ public class Shop : MonoBehaviour
             UpdateMoreDetails(upgrade, true);
         }
     }
-
+    //Updates the details canvas
     private void UpdateMoreDetails(Upgrade upgrade, bool changeVisibility)
     {
         print("update");
         nameLabel.text = upgrade.name;
-        if (upgrade.name == "Profit Per Square")
-        {
-            FindObjectOfType<PlayerStats>().EnableProfitPerSquare("coins");
-        }
-        if (upgrade.name == "Coins Everlasting")
-        { 
-            FindObjectOfType<PlayerStats>().EnableEL("coins");
-        }
         descriptionLabel.text = upgrade.GetDescription();
         BigInteger price = (BigInteger)(upgrade.GetPrice() * Mathf.Pow(upgrade.GetScaling(), upgrade.GetLevel()));
         priceLabel.text = FindObjectOfType<PlayerStats>().CheckForSuffix((float)price, false);
@@ -93,6 +94,7 @@ public class Shop : MonoBehaviour
         {
             priceLabel.text = "Maxed!";
         }
+        // level cap -1 means uncapped
         if (upgrade.GetLevelCap() == -1)
         {
             levelLabel.text = upgrade.GetLevel().ToString();
@@ -101,7 +103,7 @@ public class Shop : MonoBehaviour
         {
             levelLabel.text = upgrade.GetLevel().ToString() + " / " + upgrade.GetLevelCap().ToString();
         }
-        
+        //calculates the effect and displays the effect if the upgrade has one
         if (upgrade.GetIsMulti())
         {
             float effect = Mathf.Pow(upgrade.GetEffect(), upgrade.GetLevel());
@@ -117,6 +119,7 @@ public class Shop : MonoBehaviour
         {
             effectLabel.text = "";
         }
+        //displays the image of the currency needed to buy this upgrade
         if (upgrade.GetCurrencyNeeded() == "coins")
         {
             currencyNeededImage.sprite = coinImage;
@@ -129,12 +132,17 @@ public class Shop : MonoBehaviour
         {
             currencyNeededImage.sprite = diamondImage;
         }
+        else if (upgrade.GetCurrencyNeeded() == "clouds")
+        {
+            currencyNeededImage.sprite = cloudImage;
+        }
         selectedUpgrade = upgrade;
         if (changeVisibility)
         {
             upgradeCanvas.gameObject.SetActive(!upgradeCanvas.gameObject.activeInHierarchy);
         }
     }
+    //What happens when an upgrade is bought
     public void BuyUpgrade()
     {
         if (selectedUpgrade.GetCurrencyNeeded() == "coins")
@@ -153,6 +161,7 @@ public class Shop : MonoBehaviour
                 }
             }
         }
+        // Branches off into three similar functions depending on the currency needed
         else if (selectedUpgrade.GetCurrencyNeeded() == "crystals")
         {
             BuyCrystalUpgrade();
@@ -160,6 +169,10 @@ public class Shop : MonoBehaviour
         else if (selectedUpgrade.GetCurrencyNeeded() == "diamonds")
         {
             BuyDiamondUpgrade();
+        }
+        else if (selectedUpgrade.GetCurrencyNeeded() == "clouds")
+        {
+            BuyCloudUpgrade();
         }
     }
     public void BuyDiamondUpgrade()
@@ -194,6 +207,23 @@ public class Shop : MonoBehaviour
             }
         }
     }
+    public void BuyCloudUpgrade()
+    {
+        UpdatePlayerCoins(FindObjectOfType<PlayerStats>().GetCrystals(), "clouds");
+        if ((float)clouds >= selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel()))
+        {
+            
+            // level cap -1 means uncapped
+            if (selectedUpgrade.GetLevel() + 1 <= selectedUpgrade.GetLevelCap() || selectedUpgrade.GetLevelCap() == -1)
+            {
+                
+                FindObjectOfType<PlayerStats>().GameEnded(Mathf.RoundToInt(selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel())),0, false, "clouds");
+                selectedUpgrade.LevelUp();
+                UpdateMoreDetails(selectedUpgrade, false);
+            }
+        }
+    }
+    //return function
     public Upgrade[] GetUpgrades()
     {
         return upgrades;

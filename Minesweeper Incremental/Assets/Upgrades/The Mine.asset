@@ -15,7 +15,7 @@ MonoBehaviour:
   description: You have dug deep enough to unearth a mine entrance. Unlocks The Mine.
     The Mine Button is in the start scene. Unlocks a lot of new upgrades.
   currencyNeeded: coins
-  level: 1
+  level: 0
   basePrice: 250
   scaling: 1
   effect: 0

@@ -22,12 +22,25 @@ public class AssignScript : MonoBehaviour
     [SerializeField] List<Button> bombs;
     [SerializeField] Button diamond;
     [SerializeField] Upgrade largerCoinBoardUpgrade;
+    [SerializeField] Upgrade largerCrystalsBoardUpgrade;
+    [SerializeField] Upgrade largerCloudsBoardUpgrade;
+    [SerializeField] Upgrade portalCoinsUpgrade;
+    [SerializeField] Upgrade portalCrystalsUpgrade;
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        // Checks the current scene and assigns uses the upgrade for the scene for more bombs
         if (SceneManager.GetActiveScene().name == "Game Scene")
         {
             numOfBombs += 2 * largerCoinBoardUpgrade.GetLevel();
+        }
+        else if (SceneManager.GetActiveScene().name == "The Mine Game Scene")
+        {
+            numOfBombs += 2 * largerCrystalsBoardUpgrade.GetLevel();
+        }
+        else if (SceneManager.GetActiveScene().name == "Heaven Game Scene")
+        {
+            numOfBombs += 2 * largerCloudsBoardUpgrade.GetLevel();
         }
         bombsLeft = numOfBombs;
         bombsLeftText.text = bombsLeft.ToString();
@@ -37,41 +50,47 @@ public class AssignScript : MonoBehaviour
         SetDiamond();
         StartCoroutine(SetNonBombsLeftUnclicked());
     }
-
+    // Sets the diamond in The Mine
     private void SetDiamond()
     {
-        if (SceneManager.GetActiveScene().name == "The Mine Game Scene")
+        if (portalCoinsUpgrade.GetLevel() == 1 && portalCrystalsUpgrade.GetLevel() == 1)
         {
-            int chance = Random.Range(1, 5);
-            if (chance == 1)
+            if (SceneManager.GetActiveScene().name == "The Mine Game Scene")
             {
-                buttons = FindObjectOfType<Generate>().GetButtons();
-                diamondNum = Random.Range(0, buttons.Count);
-                if (buttons[diamondNum].gameObject.tag != "isDiamond")
+                int chance = Random.Range(1, 5);
+                if (chance == 1)
                 {
-                    buttons[diamondNum].gameObject.tag = "isDiamond";
+                    buttons = FindObjectOfType<Generate>().GetButtons();
+                    diamondNum = Random.Range(0, buttons.Count);
+                    if (buttons[diamondNum].gameObject.tag != "isDiamond")
+                    {
+                        buttons[diamondNum].gameObject.tag = "isDiamond";
+                    }
+                    else
+                    {
+                        SetDiamond();
+                    }
+                    diamond = buttons[diamondNum];
                 }
-                else
-                {
-                    SetDiamond();
-                }
-                diamond = buttons[diamondNum];
             }
         }
     }
-
+    // Really obvious
     private IEnumerator SetNonBombsLeftUnclicked()
     {
         yield return new WaitForEndOfFrame();
         nonBombsLeftUnclicked = gameCanvas.transform.childCount - numOfBombs;
         totalNonBombTiles = nonBombsLeftUnclicked;
     }
+    // Takes the buttons from Generate and stores it in a variable
     private void AddToButtons()
     {
         buttons = FindObjectOfType<Generate>().GetButtons();
     }
+    // Sets a bomb for the game
     private void SetBomb()
     {
+        // just in case
         buttons = FindObjectOfType<Generate>().GetButtons();
         bombNum = Random.Range(0, buttons.Count);
         if (buttons[bombNum].gameObject.tag != "isBomb")
@@ -84,23 +103,15 @@ public class AssignScript : MonoBehaviour
         }
         bombs.Add(buttons[bombNum]);
     }
+    // Repeatedly sets bombs depending on the variable numOfBombs
     private void SetBombs()
     {
         for (int i = 0; i < numOfBombs; i++)
         {
             SetBomb();
         }
-        /*Button[] buttonss = FindObjectsOfType<Button>();
-        for (int i = 0; i < buttonss.Length; i++)
-        {
-            buttonss[i].CountSurroundingBombs();
-        }*/
     }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    // When a player flags a square, it will change the display
     public void Flagged(bool flagging)
     {
         if (flagging)
@@ -113,30 +124,41 @@ public class AssignScript : MonoBehaviour
         }
         bombsLeftText.text = bombsLeft.ToString();
     }
+    // What happens when a square that is not a bomb clicked
     public IEnumerator nonBombClicked()
     {
+        // Transfers a square from unclicked to clicked
         nonBombsLeftUnclicked--;
         nonBombsClicked++;
+        // If all the squares are clicked
         if (nonBombsLeftUnclicked <= 0)
         {
             foreach (var bomb in bombs)
             {
+                // Reveals the bomb without showing to prevent loss from random click
                 bomb.SilentReveal();
             }
+            //waits a few seconds (probably for a cutscene or something idk)
             yield return new WaitForSeconds(defaultWinWaitTime);
-            
+            //awards different currencies based on the scene
             if (SceneManager.GetActiveScene().name == "The Mine Game Scene")
             {
                 FindObjectOfType<PlayerStats>().GameEnded(defaultAmountOfCoins, nonBombsClicked,true, "crystals");
                 FindObjectOfType<SceneLoader>().LoadTheMineWinScene();
             }
-            else
+            else if (SceneManager.GetActiveScene().name == "Heaven Game Scene")
+            {
+                FindObjectOfType<PlayerStats>().GameEnded(defaultAmountOfCoins, nonBombsClicked, true, "clouds");
+                FindObjectOfType<SceneLoader>().LoadHeavenWinScene();
+            }
+            else if (SceneManager.GetActiveScene().name == "Game Scene")
             {
                 FindObjectOfType<PlayerStats>().GameEnded(defaultAmountOfCoins, nonBombsClicked, true, "coins");
                 FindObjectOfType<SceneLoader>().LoadWinScene();
             }
         }
     }
+    //return functions
     public int GetBombNum()
     {
         return bombNum;
