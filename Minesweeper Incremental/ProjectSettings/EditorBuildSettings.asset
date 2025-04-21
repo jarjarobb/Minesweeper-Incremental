@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Other/Endgame.unity
     guid: e1b394ee8e37e214cad6f66a707df456
+  - enabled: 1
+    path: Assets/Scenes/Normal Realm/REAL Win Scene.unity
+    guid: cd7e31a19a48f1c4896816e3be748e09
   m_configObjects: {}

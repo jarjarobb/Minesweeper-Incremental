@@ -23,7 +23,10 @@ public class Resets : MonoBehaviour
                     return;
                 }
             }
-            upgrades.Add(upgrade);
+            if (!upgrade.GetNotResetOnEndgame())
+            {
+                upgrades.Add(upgrade);
+            }
         }
         foreach (Upgrade upgrade in upgrades) 
         {

@@ -24,12 +24,14 @@ public class Shop : MonoBehaviour
     [SerializeField] Sprite crystalImage;
     [SerializeField] Sprite diamondImage;
     [SerializeField] Sprite cloudImage;
+    [SerializeField] Sprite endgameTokenImage;
     
     Upgrade selectedUpgrade;
     BigInteger coins;
     BigInteger crystals;
     BigInteger clouds;
     int diamonds;
+    int endgameTokens;
     
 
     // Start is called before the first frame update
@@ -37,6 +39,7 @@ public class Shop : MonoBehaviour
     {
         //Sets the initial value of coins
         coins = FindObjectOfType<PlayerStats>().GetCoins();
+        clouds = FindObjectOfType<PlayerStats>().GetClouds();
     }
 
     public void UpdatePlayerCoins(BigInteger newAmount, string currency)
@@ -56,6 +59,10 @@ public class Shop : MonoBehaviour
         else if (currency == "clouds")
         {
             clouds = newAmount;
+        }
+        else if (currency == "endgames")
+        {
+            endgameTokens = (int)newAmount;
         }
     }
     //What happens when the expand button of an upgrade is clicked
@@ -85,7 +92,6 @@ public class Shop : MonoBehaviour
     //Updates the details canvas
     private void UpdateMoreDetails(Upgrade upgrade, bool changeVisibility)
     {
-        print("update");
         nameLabel.text = upgrade.name;
         descriptionLabel.text = upgrade.GetDescription();
         BigInteger price = (BigInteger)(upgrade.GetPrice() * Mathf.Pow(upgrade.GetScaling(), upgrade.GetLevel()));
@@ -107,10 +113,9 @@ public class Shop : MonoBehaviour
         if (upgrade.GetIsMulti())
         {
             float effect = Mathf.Pow(upgrade.GetEffect(), upgrade.GetLevel());
-            print(effect);
             effectLabel.text = "Effect: x" + FindObjectOfType<PlayerStats>().CheckForSuffix(effect, true);
         }
-        if (upgrade.GetIsAdder())
+        else if (upgrade.GetIsAdder())
         {
             float effect = 1+upgrade.GetEffect() *upgrade.GetLevel();
             effectLabel.text = "Effect: x" + FindObjectOfType<PlayerStats>().CheckForSuffix(effect, true);
@@ -135,6 +140,10 @@ public class Shop : MonoBehaviour
         else if (upgrade.GetCurrencyNeeded() == "clouds")
         {
             currencyNeededImage.sprite = cloudImage;
+        }
+        else if (upgrade.GetCurrencyNeeded() == "endgames")
+        {
+            currencyNeededImage.sprite = endgameTokenImage;
         }
         selectedUpgrade = upgrade;
         if (changeVisibility)
@@ -174,6 +183,10 @@ public class Shop : MonoBehaviour
         else if (selectedUpgrade.GetCurrencyNeeded() == "clouds")
         {
             BuyCloudUpgrade();
+        }
+        else if (selectedUpgrade.GetCurrencyNeeded() == "endgames")
+        {
+            BuyEndgameUpgrade();
         }
     }
     public void BuyDiamondUpgrade()
@@ -215,7 +228,7 @@ public class Shop : MonoBehaviour
     }
     public void BuyCloudUpgrade()
     {
-        UpdatePlayerCoins(FindObjectOfType<PlayerStats>().GetCrystals(), "clouds");
+        UpdatePlayerCoins(FindObjectOfType<PlayerStats>().GetClouds(), "clouds");
         if ((float)clouds >= selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel()))
         {
             
@@ -224,6 +237,26 @@ public class Shop : MonoBehaviour
             {
                 
                 FindObjectOfType<PlayerStats>().GameEnded(Mathf.RoundToInt(selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel())),0, false, "clouds");
+                selectedUpgrade.LevelUp();
+                if (selectedUpgrade.name == "Endgame")
+                {
+                    FindObjectOfType<PlayerStats>().ChangeEndgameDisplay(selectedUpgrade.GetLevel());
+                }
+                UpdateMoreDetails(selectedUpgrade, false);
+            }
+        }
+    }
+    private void BuyEndgameUpgrade()
+    {
+        UpdatePlayerCoins(FindObjectOfType<PlayerStats>().GetEndgameTokens(), "endgames");
+        if ((float)endgameTokens >= selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel()))
+        {
+
+            // level cap -1 means uncapped
+            if (selectedUpgrade.GetLevel() + 1 <= selectedUpgrade.GetLevelCap() || selectedUpgrade.GetLevelCap() == -1)
+            {
+
+                FindObjectOfType<PlayerStats>().SpendEndgameTokens(Mathf.RoundToInt(selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel())));
                 selectedUpgrade.LevelUp();
                 UpdateMoreDetails(selectedUpgrade, false);
             }

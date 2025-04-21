@@ -54,6 +54,7 @@ public class Unlocks : MonoBehaviour
     [SerializeField] Upgrade endgameUpgrade;
     [SerializeField] bool endgamed;
     [SerializeField] UnityEngine.UI.Button endgameButton;
+    [SerializeField] GameObject globalBoost;
     // Start is called before the first frame update
     void Start()
     {
@@ -180,6 +181,10 @@ public class Unlocks : MonoBehaviour
             crystalsIIUpgrade.GetLevel() >= 1 && cloudsUpgrade.GetLevel() >= 1)
         {
             endgame.SetActive(true);
+        }
+        if (FindObjectOfType<PlayerStats>().GetEndgame() >= 1)
+        {
+            globalBoost.SetActive(true);
         }
     }
     // Update is called once per frame

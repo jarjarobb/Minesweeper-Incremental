@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ public class PlayerStats : MonoBehaviour
 
     BigInteger coins = 0;
     BigInteger crystals = 0;
-    BigInteger clouds = 0;
+    BigInteger clouds = 1000;
     [SerializeField] int diamonds;
     [SerializeField] int endgame;
     [SerializeField] int endgameTokens;
@@ -23,6 +24,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] Sprite crystalImage;
     [SerializeField] Sprite diamondImage;
     [SerializeField] Sprite cloudImage;
+    [SerializeField] Sprite endgameTokenImage;
     [SerializeField] TextMeshProUGUI currencyDisplay;
     [SerializeField] Image currencyImageDisplay;
     [SerializeField] Image currencyDisplayBackground;
@@ -40,6 +42,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] TextMeshProUGUI statsCrystalsDisplay;
     [SerializeField] TextMeshProUGUI statsDiamondsDisplay;
     [SerializeField] TextMeshProUGUI statsCloudsDisplay;
+    [SerializeField] TextMeshProUGUI statsEndgameTokensDisplay;
     string previousScene = "Start Scene";
     [SerializeField]bool coinsProfitPerSquare;
     [SerializeField] bool coinsEL;
@@ -49,6 +52,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] bool cloudsEL;
     int baseCoins = 1;
     [SerializeField] List<float> additiveMultis;
+    [SerializeField] TextMeshProUGUI endgameDisplay;
     int coinsOnWin;
 
     //Creates the Singleton
@@ -78,7 +82,7 @@ public class PlayerStats : MonoBehaviour
         {
             currencyImageDisplay.overrideSprite = crystalImage;
             currencyDisplayBackground.color = new Color(currencyDisplayBackground.color.r, currencyDisplayBackground.color.g, 255, 1);
-            currencyDisplay.text = CheckForSuffix((float)crystals, false); 
+            currencyDisplay.text = CheckForSuffix((float)crystals, false);
         }
         else if (currentDisplayCurrency == "diamonds")
         {
@@ -91,6 +95,13 @@ public class PlayerStats : MonoBehaviour
             currencyImageDisplay.overrideSprite = cloudImage;
             currencyDisplayBackground.color = new Color(currencyDisplayBackground.color.r, currencyDisplayBackground.color.g, 0, 1);
             currencyDisplay.text = CheckForSuffix((float)clouds, false);
+
+        }
+        else if (currentDisplayCurrency == "endgame tokens")
+        {
+            currencyImageDisplay.overrideSprite = endgameTokenImage;
+            currencyDisplayBackground.color = new Color(currencyDisplayBackground.color.r, currencyDisplayBackground.color.g, 255, 1);
+            currencyDisplay.text = CheckForSuffix((float)endgameTokens, false);
         }
         else if (currentDisplayCurrency == "automatic")
         {
@@ -106,18 +117,17 @@ public class PlayerStats : MonoBehaviour
                 currencyDisplayBackground.color = new Color(currencyDisplayBackground.color.r, currencyDisplayBackground.color.g, 255, 1);
                 currencyDisplay.text = CheckForSuffix((float)crystals, false);
             }
-            else if (currentDimension =="heaven")
+            else if (currentDimension == "heaven")
             {
                 currencyImageDisplay.overrideSprite = cloudImage;
                 currencyDisplayBackground.color = new Color(currencyDisplayBackground.color.r, currencyDisplayBackground.color.g, 0, 1);
                 currencyDisplay.text = CheckForSuffix((float)clouds, false);
-            }    
+            }
         }
     }
     // hides the settings button and show all the settings if wanted
     public void HideSettingsButton(bool showSettings)
     {
-        settingsButton.gameObject.SetActive(false);
         if (showSettings)
         {
             settingsCanvas.gameObject.SetActive(true);
@@ -126,8 +136,11 @@ public class PlayerStats : MonoBehaviour
     //shows the settings button and hides all the settings
     public void ShowSettingsButton()
     {
-        settingsButton.gameObject.SetActive(true);
         settingsCanvas.gameObject.SetActive(false);
+    }
+    public Canvas GetSettingsCanvas()
+    {
+        return settingsCanvas;
     }
     //sets the current display
     private void Start()
@@ -150,19 +163,11 @@ public class PlayerStats : MonoBehaviour
             previousWord = s;
         }
         ChangeCurrencyDisplay(currentDisplayCurrency);
-        if (coins != 0 && currentDisplayCurrency == "coins")
-        {
-            UpdateDisplay(true, false);
-        }
-        else if (crystals != 0 && currentDisplayCurrency == "crystals")
-        {
-            UpdateDisplay(true, false);
-        }
-        else if (diamonds != 0 && currentDisplayCurrency == "diamonds")
-        {
-            UpdateDisplay(true, false);
-        }
-        else if (clouds != 0 && currentDisplayCurrency == "clouds")
+        if (coins != 0 && currentDisplayCurrency == "coins" ||
+            crystals != 0 && currentDisplayCurrency == "crystals"||
+            diamonds != 0 && currentDisplayCurrency == "diamonds"||
+            clouds != 0 && currentDisplayCurrency == "clouds"||
+            endgameTokens != 0 && currentDisplayCurrency == "endgame tokens")
         {
             UpdateDisplay(true, false);
         }
@@ -184,6 +189,17 @@ public class PlayerStats : MonoBehaviour
             if (currentDisplayCurrency =="clouds")
             {
                 coinsDisplay.text =clouds.ToString();
+            }
+            if (currentDisplayCurrency =="endgame tokens")
+            {
+                coinsDisplay.text = endgameTokens.ToString();
+            }
+        }
+        foreach (var upgrade in upgrades)
+        {
+            if (upgrade.name == "Endgame")
+            {
+                ChangeEndgameDisplay(upgrade.GetLevel());
             }
         }
         StartCoroutine(GenerateCoins());
@@ -367,6 +383,15 @@ public class PlayerStats : MonoBehaviour
         {
             statsCloudsDisplay.text = "0";
         }
+        if (endgameTokens != 0)
+        {
+            statsEndgameTokensDisplay.text = CheckForSuffix((float)endgameTokens, false);
+        }
+        else
+        {
+            statsEndgameTokensDisplay.text ="0";
+        }
+
         if (!onlyChangeStats)
         {
             if (currentDisplayCurrency == "coins")
@@ -396,6 +421,12 @@ public class PlayerStats : MonoBehaviour
                 currencyImageDisplay.overrideSprite = cloudImage;
                 currencyDisplayBackground.color = new Color(currencyDisplayBackground.color.r, currencyDisplayBackground.color.g, 0, 1);
                 currencyDisplay.text = CheckForSuffix((float)clouds, false);
+            }
+            else if (currentDisplayCurrency == "endgame tokens")
+            {
+                currencyImageDisplay.overrideSprite = endgameTokenImage;
+                currencyDisplayBackground.color = new Color(currencyDisplayBackground.color.r, currencyDisplayBackground.color.g, 255, 1);
+                currencyDisplay.text = CheckForSuffix((float)endgameTokens, false);
             }
             else if (currentDisplayCurrency == "automatic")
             {
@@ -442,7 +473,7 @@ public class PlayerStats : MonoBehaviour
             if (upgrade.GetIsMulti())
             {
                 string currencyAffected = upgrade.GetCurrencyAffected();
-                if (currencyAffected.ToLower() == currency)
+                if (currencyAffected.ToLower() == currency || currencyAffected.ToLower() == "global")
                 {
                     float effect = upgrade.GetEffect();
                     coinsMultis *= Mathf.Pow(effect, upgrade.GetLevel());
@@ -451,10 +482,9 @@ public class PlayerStats : MonoBehaviour
             if (upgrade.GetIsAdder())
             {
                 string currencyAffected = upgrade.GetCurrencyAffected();
-                if (currencyAffected.ToLower() == currency)
+                if (currencyAffected.ToLower() == currency || currencyAffected.ToLower() == "global")
                 {
                     float effect = upgrade.GetEffect();
-                    print(upgrade.GetLevel());
                     baseAdditiveMulti*=1+effect*upgrade.GetLevel();
                 }
             }
@@ -549,6 +579,23 @@ public class PlayerStats : MonoBehaviour
     {
         diamonds++;
     }
+    public void SpendEndgameTokens(int amount)
+    {
+        endgameTokens -= amount;
+        UpdateDisplay(false, false);
+    }
+    public void ChangeEndgameDisplay(int endgameTokensToEarn)
+    {
+        endgameDisplay.text = endgameTokensToEarn.ToString();
+    }
+    public void HideEndgameDisplay()
+    {
+        endgameDisplay.gameObject.SetActive(false);
+    }
+    public void ShowEndgameDisplay()
+    {
+        endgameDisplay.gameObject.SetActive(true);
+    }
     // Stores the previous scene
     public void StorePreviousScene(string sceneName)
     {
@@ -575,6 +622,10 @@ public class PlayerStats : MonoBehaviour
     public BigInteger GetClouds()
     {
         return clouds;
+    }
+    public int GetEndgameTokens()
+    {
+        return endgameTokens;
     }
     public Upgrade[] GetUpgrades()
     {

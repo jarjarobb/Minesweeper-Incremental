@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Increases Coins earned by 1.3x compounding per level
   currencyNeeded: coins
-  level: 0
+  level: 4
   basePrice: 10
   scaling: 1.5
   effect: 1.3

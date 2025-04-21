@@ -18,13 +18,21 @@ public class SceneLoader : MonoBehaviour
     public void LoadStartScene(bool loadPreviousScene)
     {
         FindObjectOfType<PlayerStats>().ShowSettingsButton();
+        FindObjectOfType<PlayerStats>().HideEndgameDisplay();
         if (loadPreviousScene)
         {
-           
+           if (FindObjectOfType<Cutscene>())
+            {
+                FindObjectOfType<Cutscene>().SelfDestruct();
+            }
             SceneManager.LoadScene(FindObjectOfType<PlayerStats>().GetPreviousScene());
         }
         else
         {
+            if (FindObjectOfType<Cutscene>())
+            {
+                FindObjectOfType<Cutscene>().SelfDestruct();
+            }
             FindObjectOfType<PlayerStats>().DimensionCrossed("normal");
             SceneManager.LoadScene("Start Scene");
         }
@@ -39,16 +47,19 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadSettings()
     {
-        //sets the scene before entering settings, and hides the settings button to prevent softlock
-        FindObjectOfType<PlayerStats>().StorePreviousScene(SceneManager.GetActiveScene().name);
-        FindObjectOfType<PlayerStats>().HideSettingsButton(true);
-        SceneManager.LoadScene("Settings");
+        if (FindObjectOfType<PlayerStats>().GetSettingsCanvas().gameObject.activeSelf)
+        {
+            FindObjectOfType<PlayerStats>().ShowSettingsButton();
+        }
+        else
+        {
+            FindObjectOfType<PlayerStats>().HideSettingsButton(true);
+        }
     }
     public void LoadShop()
     {
-        //sets the scene before entering the shop, and hides the settings button to prevent softlock
+        //sets the scene before entering the shop
         FindObjectOfType<PlayerStats>().StorePreviousScene(SceneManager.GetActiveScene().name);
-        FindObjectOfType<PlayerStats>().HideSettingsButton(false);
         SceneManager.LoadScene("Shop");
     }
     public void LoadInstructions()
@@ -109,7 +120,12 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadEndgame()
     {
+        FindObjectOfType<PlayerStats>().ShowEndgameDisplay();
         SceneManager.LoadScene("Endgame");
+    }
+    public void LoadRealWinScene()
+    {
+        SceneManager.LoadScene("REAL Win Scene");
     }
 }
 

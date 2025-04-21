@@ -16,10 +16,11 @@ MonoBehaviour:
     and this upgrade unlocks ???.
   currencyNeeded: coins
   level: 0
-  basePrice: 2000
+  basePrice: 20000
   scaling: 1
   effect: 0
   currencyAffected: 
   isMulti: 0
   isAdder: 0
   levelCap: 1
+  notResetOnEndgame: 0

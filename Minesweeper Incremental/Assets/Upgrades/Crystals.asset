@@ -15,7 +15,7 @@ MonoBehaviour:
   description: Increases base Crystals earned by 50% (linear) per level.
   currencyNeeded: coins
   level: 0
-  basePrice: 100
+  basePrice: 1000
   scaling: 1.35
   effect: 0.5
   currencyAffected: crystals

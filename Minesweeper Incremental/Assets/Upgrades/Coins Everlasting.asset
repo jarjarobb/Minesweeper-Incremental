@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Coins Everlasting
   m_EditorClassIdentifier: 
   description: Buying Coin Upgrades no longer spends coins.
-  currencyNeeded: coins
+  currencyNeeded: crystals
   level: 0
-  basePrice: 1000
+  basePrice: 100
   scaling: 1
   effect: 0
   currencyAffected: 

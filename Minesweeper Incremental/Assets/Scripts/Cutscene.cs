@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Cutscene : MonoBehaviour
 {
@@ -29,8 +30,19 @@ public class Cutscene : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+    public void SelfDestruct()
+    {
+        if (SceneManager.GetActiveScene().name != "Heaven Start Scene" || SceneManager.GetActiveScene().name != "Win Scene")
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     public IEnumerator HeavenCutscene()
     {
+        text.text = "Welcome";
+        text.color = new Color(0,0,0,0);
+        whiteBackground.color = new Color(255,255,255,0);
         cutsceneCanvas.gameObject.SetActive(true);
         fadeInBackground = true;
         yield return new WaitForSeconds(waitTimeBetweenActions);
@@ -52,6 +64,9 @@ public class Cutscene : MonoBehaviour
     }
     public IEnumerator EndgameCutscene(int endgames)
     {
+        text.text = "All of your progress vanishes before your eyes...";
+        text.color = new Color(255,255,255, 0);
+        whiteBackground.color = new Color(0,0,0, 0);
         cutsceneCanvas.gameObject.SetActive(true);
         fadeInBackground = true;
         yield return new WaitForSeconds(waitTimeBetweenActions);
@@ -67,7 +82,8 @@ public class Cutscene : MonoBehaviour
         text.text = "Endgames: " + endgames.ToString();
         fadeInText = true;
         yield return new WaitForSeconds(waitTimeBetweenActions);
-        FindObjectOfType<SceneLoader>().LoadWinScene();
+        FindObjectOfType<PlayerStats>().HideEndgameDisplay();
+        FindObjectOfType<SceneLoader>().LoadRealWinScene();
         fadeOutText = true;
         fadeOutBackground = true;
     }

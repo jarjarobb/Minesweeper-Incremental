@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1526346363133412557
 MonoBehaviour:
@@ -83,3 +83,4 @@ MonoBehaviour:
   endgameUpgrade: {fileID: 11400000, guid: 99af92052da65df4496b6d7c23bcf712, type: 2}
   endgamed: 0
   endgameButton: {fileID: 0}
+  globalBoost: {fileID: 0}
