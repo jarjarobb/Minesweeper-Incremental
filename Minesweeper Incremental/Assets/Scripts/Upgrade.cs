@@ -17,6 +17,7 @@ public class Upgrade : ScriptableObject
     [SerializeField] bool isMulti;
     [SerializeField] bool isAdder;
     [SerializeField] int levelCap;
+    [SerializeField] bool notResetOnEndgame;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +39,14 @@ public class Upgrade : ScriptableObject
     public int GetLevelCap() { return levelCap; }
     public string GetCurrencyNeeded() { return currencyNeeded; }
     public bool GetIsAdder() { return isAdder; }
+    public bool GetNotResetOnEndgame() { return notResetOnEndgame; }
 
     public void LevelUp()
     {
         level++;
     }
-
+    public void ResetLevel()
+    {
+        level = 0;
+    }
 }

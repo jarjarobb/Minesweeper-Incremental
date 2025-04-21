@@ -682,13 +682,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerStats
       objectReference: {fileID: 0}
-    - target: {fileID: 737168294774232560, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
+    - target: {fileID: 3075381565750569404, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2501760438185062189, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5812013025955718974, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
       propertyPath: m_RootOrder
@@ -734,7 +730,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8478520047327330990, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
+    - target: {fileID: 8242730321589937673, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964105801054742530, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

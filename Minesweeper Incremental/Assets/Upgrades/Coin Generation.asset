@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9ecfb128a3b69c4ea3c59e1396579d2, type: 3}
-  m_Name: Crystals EL
+  m_Name: Coin Generation
   m_EditorClassIdentifier: 
-  description: Buying Crystal Upgrades no longer take away crystals. I know this
-    is repetitive, but you are almost at the end. Good Luck
-  currencyNeeded: crystals
+  description: Generates 1% of coins earned on win per level up to 10%. The last
+    upgrade requires all the upgrades to have at least 1 level.
+  currencyNeeded: clouds
   level: 0
-  basePrice: 500
-  scaling: 1
+  basePrice: 100
+  scaling: 1.7
   effect: 0
   currencyAffected: 
   isMulti: 0
   isAdder: 0
-  levelCap: 1
+  levelCap: 10
   notResetOnEndgame: 0

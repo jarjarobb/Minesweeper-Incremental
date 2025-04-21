@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1526346363133412557
 MonoBehaviour:
@@ -60,7 +60,26 @@ MonoBehaviour:
   portalCrystalsUpgrade: {fileID: 11400000, guid: 563d570fb79d1224c817c0fb8da83fd1, type: 2}
   portalKey: {fileID: 0}
   portalKeyUpgrade: {fileID: 11400000, guid: a5d8958f651470841a3807eaa4b94a56, type: 2}
+  heavenButton: {fileID: 0}
+  moreCoinsIII: {fileID: 0}
+  moreCrystalsII: {fileID: 0}
+  moreClouds: {fileID: 0}
+  crystalsEL: {fileID: 0}
+  cloudsPPS: {fileID: 0}
+  cloudsPPSUpgrade: {fileID: 11400000, guid: 593abd6d711878a4faa2981fb3b3743f, type: 2}
+  biggerFieldIII: {fileID: 0}
+  coinGeneration: {fileID: 0}
   coinsELUpgrade: {fileID: 11400000, guid: d75d6d68dab0b32428a09c1ff21efdc4, type: 2}
   crystalsELUpgrade: {fileID: 11400000, guid: a42c6d299d5682941b5e72e5ab0e06a8, type: 2}
-  cloudsPPSUpgrade: {fileID: 11400000, guid: 593abd6d711878a4faa2981fb3b3743f, type: 2}
   cloudsELUpgrade: {fileID: 11400000, guid: c6228a22e962af44691013328ecadc70, type: 2}
+  coinGenerationUpgrade: {fileID: 11400000, guid: 717983c28c897684093f77a89cbe2d12, type: 2}
+  moreCoinsUpgrade: {fileID: 11400000, guid: d1e8ed1b130685542bcff34340edcd22, type: 2}
+  moreCoinsIIUpgrade: {fileID: 11400000, guid: a7e7b465e5d588b4b87a99e7e40dba31, type: 2}
+  moreCoinsIIIUpgrade: {fileID: 11400000, guid: e13ad14393e34624fbed10b6c0153e65, type: 2}
+  crystalsUpgrade: {fileID: 11400000, guid: e81cc127402fc2e4d8d8d07dbf7cb1ed, type: 2}
+  cloudsUpgrade: {fileID: 11400000, guid: f15e72b3c9a0e5f4caed8be895ccdc4c, type: 2}
+  crystalsIIUpgrade: {fileID: 11400000, guid: d30c52257fff33d43befaaaba0b2a3da, type: 2}
+  endgame: {fileID: 0}
+  endgameUpgrade: {fileID: 11400000, guid: 99af92052da65df4496b6d7c23bcf712, type: 2}
+  endgamed: 0
+  endgameButton: {fileID: 0}

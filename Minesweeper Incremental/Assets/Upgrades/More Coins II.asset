@@ -20,4 +20,6 @@ MonoBehaviour:
   effect: 1.5
   currencyAffected: coins
   isMulti: 1
+  isAdder: 0
   levelCap: -1
+  notResetOnEndgame: 0

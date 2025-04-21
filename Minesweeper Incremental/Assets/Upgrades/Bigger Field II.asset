@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: Bigger Field II
   m_EditorClassIdentifier: 
   description: Increases the size of the crystal field by 1 column and 1 row per
-    level up to a 8x8.
+    level up to a 8x8. Also increases bombs by 2 per level, and crystals by 1.2 per
+    level.
   currencyNeeded: crystals
   level: 0
   basePrice: 75
   scaling: 5
-  effect: 0
-  currencyAffected: 
-  isMulti: 0
+  effect: 1.2
+  currencyAffected: crystals
+  isMulti: 1
   isAdder: 0
   levelCap: 3
+  notResetOnEndgame: 0

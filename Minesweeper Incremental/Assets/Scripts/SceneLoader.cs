@@ -107,6 +107,10 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Heaven Lose Scene");
     }
+    public void LoadEndgame()
+    {
+        SceneManager.LoadScene("Endgame");
+    }
 }
 
 

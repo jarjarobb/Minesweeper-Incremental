@@ -22,3 +22,4 @@ MonoBehaviour:
   isMulti: 0
   isAdder: 0
   levelCap: 1
+  notResetOnEndgame: 0

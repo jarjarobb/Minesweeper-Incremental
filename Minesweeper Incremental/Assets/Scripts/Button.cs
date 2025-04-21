@@ -141,11 +141,17 @@ public class Button : MonoBehaviour
             FindObjectOfType<SceneLoader>().LoadTheMineLoseScene();
             
         }
-        else
+        else if (SceneManager.GetActiveScene().name == "Game Scene")
         {
             FindObjectOfType<PlayerStats>().GameEnded(amountOfCoinsToGive,amountOfButtonsRevealed, true, "coins");
             FindObjectOfType<SceneLoader>().LoadLoseScene();
             
+        }
+        else if (SceneManager.GetActiveScene().name == "Heaven Game Scene")
+        {
+            FindObjectOfType<PlayerStats>().GameEnded(amountOfCoinsToGive, amountOfButtonsRevealed, true, "clouds");
+            FindObjectOfType<SceneLoader>().LoadHeavenLoseScene();
+
         }
     }
     // Reveals the square without showing to prevent player losing forcing a win bug and player winning accidentaly lose bug

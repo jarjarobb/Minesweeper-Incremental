@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9ecfb128a3b69c4ea3c59e1396579d2, type: 3}
-  m_Name: Crystals EL
+  m_Name: More Clouds
   m_EditorClassIdentifier: 
-  description: Buying Crystal Upgrades no longer take away crystals. I know this
-    is repetitive, but you are almost at the end. Good Luck
+  description: Increases clouds earned by +25% per level.
   currencyNeeded: crystals
   level: 0
-  basePrice: 500
-  scaling: 1
-  effect: 0
-  currencyAffected: 
+  basePrice: 100
+  scaling: 1.35
+  effect: 0.25
+  currencyAffected: clouds
   isMulti: 0
-  isAdder: 0
-  levelCap: 1
+  isAdder: 1
+  levelCap: -1
   notResetOnEndgame: 0

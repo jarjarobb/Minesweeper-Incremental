@@ -157,6 +157,7 @@ public class Shop : MonoBehaviour
 
                     FindObjectOfType<PlayerStats>().GameEnded(Mathf.RoundToInt(selectedUpgrade.GetPrice() * Mathf.Pow(selectedUpgrade.GetScaling(), selectedUpgrade.GetLevel())), 0, false, "coins");
                     selectedUpgrade.LevelUp();
+                    
                     UpdateMoreDetails(selectedUpgrade, false);
                 }
             }
@@ -187,6 +188,11 @@ public class Shop : MonoBehaviour
 
                 FindObjectOfType<PlayerStats>().SpendDiamond();
                 selectedUpgrade.LevelUp();
+                if (selectedUpgrade.name == "THE KEY")
+                {
+                    print("cutscene");
+                    StartCoroutine(FindObjectOfType<Cutscene>().HeavenCutscene());
+                }
                 UpdateMoreDetails(selectedUpgrade, false);
             }
         }

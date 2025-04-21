@@ -36,6 +36,21 @@ EditorBuildSettings:
     path: Assets/Scenes/The Mine/The Mine Game Scene.unity
     guid: 6d91d52ae012f464f9f29aa33b90cf70
   - enabled: 1
+    path: Assets/Scenes/Heaven/Heaven Start Scene.unity
+    guid: c749588b378cd834ab1039e77978b002
+  - enabled: 1
+    path: Assets/Scenes/Heaven/Heaven Win Scene.unity
+    guid: db7f5aeecba117349a8aa5b59f54b1e5
+  - enabled: 1
+    path: Assets/Scenes/Heaven/Heaven Lose Scene.unity
+    guid: d66902db9e5c05f40821fef2b533e9e6
+  - enabled: 1
+    path: Assets/Scenes/Heaven/Heaven Game Scene.unity
+    guid: 8ada90002dc07e94eb9539d4e21a2bad
+  - enabled: 1
     path: Assets/Scenes/Other/Settings.unity
     guid: 10bd58ef7c0f4c9489d159056101cfb7
+  - enabled: 1
+    path: Assets/Scenes/Other/Endgame.unity
+    guid: e1b394ee8e37e214cad6f66a707df456
   m_configObjects: {}

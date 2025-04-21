@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerStats
       objectReference: {fileID: 0}
+    - target: {fileID: 624025791464478963, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
+      propertyPath: currencyDisplayBackground
+      value: 
+      objectReference: {fileID: 365395577}
     - target: {fileID: 5812013025955718974, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -242,7 +246,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter The Mine
+  m_text: Find Clouds
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 716da90b2147dd74dace531610528fca, type: 2}
   m_sharedMaterial: {fileID: 2881965052827732756, guid: 716da90b2147dd74dace531610528fca, type: 2}
@@ -380,6 +384,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89097d109a9d6fe43bac3b5cdaaed7c6, type: 3}
+--- !u!114 &365395577 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3923864446451381673, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
+  m_PrefabInstance: {fileID: 202602474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &462064338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1029,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1346755813}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadTheMineGameScene
+        m_MethodName: LoadHeavenGameScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1120,7 +1135,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Mine Shop
+  m_text: 'Heaven Shop
 
 '
   m_isRightToLeft: 0
@@ -1257,7 +1272,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to The Mine
+  m_text: Welcome to Heaven
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 716da90b2147dd74dace531610528fca, type: 2}
   m_sharedMaterial: {fileID: 2881965052827732756, guid: 716da90b2147dd74dace531610528fca, type: 2}
@@ -1514,6 +1529,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 4396202778799527769, guid: 44fe6004f193bf247b40c4ea73d64401, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 130b7470e42f8ae44968aeec38c0be4f, type: 3}
     - target: {fileID: 8065744877584349911, guid: 44fe6004f193bf247b40c4ea73d64401, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

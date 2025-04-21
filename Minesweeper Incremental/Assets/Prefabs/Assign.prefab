@@ -65,6 +65,6 @@ MonoBehaviour:
   diamond: {fileID: 0}
   largerCoinBoardUpgrade: {fileID: 11400000, guid: 1dc3494c2c8a4a04baaf80e46d8f35af, type: 2}
   largerCrystalsBoardUpgrade: {fileID: 11400000, guid: f56fe0f33d11fe948ad3ef3795f589ba, type: 2}
-  largerCloudsBoardUpgrade: {fileID: 0}
+  largerCloudsBoardUpgrade: {fileID: 11400000, guid: c0d69d8cbaf6b0a44a3bc4f9a142ec4e, type: 2}
   portalCoinsUpgrade: {fileID: 11400000, guid: dd8de2207052c8549ae7ce73f82b3b89, type: 2}
   portalCrystalsUpgrade: {fileID: 11400000, guid: 563d570fb79d1224c817c0fb8da83fd1, type: 2}
