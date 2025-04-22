@@ -16,7 +16,7 @@ MonoBehaviour:
     THE MINE TO ACTIVATE. THE GEM HAS A 25% CHANCE OF SPAWNING EVERY GAME IN THE
     MINE. UNLOCKS A NEW AREA AND MORE UPGRADES. '
   currencyNeeded: diamonds
-  level: 1
+  level: 0
   basePrice: 1
   scaling: 1
   effect: 0

@@ -175,7 +175,7 @@ public class Unlocks : MonoBehaviour
             }
         }
         if (coinGenerationUpgrade.GetLevel() >= 1 && coinsELUpgrade.GetLevel() == 1 &&
-            crystalsELUpgrade.GetLevel() == 1 && cloudsELUpgrade.GetLevel() == 1 &&
+            crystalsELUpgrade.GetLevel() == 1 &&
             moreCoinsUpgrade.GetLevel() >= 1 && moreCoinsIIUpgrade.GetLevel() >= 1 &&
             moreCoinsIIIUpgrade.GetLevel() >= 1 && crystalsUpgrade.GetLevel() >= 1 && 
             crystalsIIUpgrade.GetLevel() >= 1 && cloudsUpgrade.GetLevel() >= 1)

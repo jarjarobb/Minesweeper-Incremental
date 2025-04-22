@@ -303,7 +303,7 @@ Transform:
   - {fileID: 7204165414689161598}
   - {fileID: 1502407031913500107}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &624025791464478963
 MonoBehaviour:
@@ -378,6 +378,7 @@ MonoBehaviour:
   statsCrystalsDisplay: {fileID: 1345198885232193076}
   statsDiamondsDisplay: {fileID: 884758538225001201}
   statsCloudsDisplay: {fileID: 1524315506866288617}
+  statsEndgameDisplay: {fileID: 2780478541009102788}
   statsEndgameTokensDisplay: {fileID: 88357422008860568}
   coinsProfitPerSquare: 0
   coinsEL: 0

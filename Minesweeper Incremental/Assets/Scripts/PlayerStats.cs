@@ -14,7 +14,7 @@ public class PlayerStats : MonoBehaviour
 
     BigInteger coins = 0;
     BigInteger crystals = 0;
-    BigInteger clouds = 1000;
+    BigInteger clouds = 0;
     [SerializeField] int diamonds;
     [SerializeField] int endgame;
     [SerializeField] int endgameTokens;
@@ -42,6 +42,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] TextMeshProUGUI statsCrystalsDisplay;
     [SerializeField] TextMeshProUGUI statsDiamondsDisplay;
     [SerializeField] TextMeshProUGUI statsCloudsDisplay;
+    [SerializeField] TextMeshProUGUI statsEndgameDisplay;
     [SerializeField] TextMeshProUGUI statsEndgameTokensDisplay;
     string previousScene = "Start Scene";
     [SerializeField]bool coinsProfitPerSquare;
@@ -383,6 +384,7 @@ public class PlayerStats : MonoBehaviour
         {
             statsCloudsDisplay.text = "0";
         }
+        statsEndgameDisplay.text = endgame.ToString();
         if (endgameTokens != 0)
         {
             statsEndgameTokensDisplay.text = CheckForSuffix((float)endgameTokens, false);

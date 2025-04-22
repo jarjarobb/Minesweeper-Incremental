@@ -269,10 +269,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerStats
       objectReference: {fileID: 0}
-    - target: {fileID: 3774968378975242245, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1346755813}
     - target: {fileID: 5812013025955718974, guid: 2825b691102ca614a86f969ec355a8ed, type: 3}
       propertyPath: m_RootOrder
       value: 5

@@ -15,7 +15,7 @@ MonoBehaviour:
   description: Crystal requirement to unlock THE PORTAL. Buying the other PORTAL
     upgrade and this upgrade unlocks ???.
   currencyNeeded: crystals
-  level: 1
+  level: 0
   basePrice: 300
   scaling: 1
   effect: 0

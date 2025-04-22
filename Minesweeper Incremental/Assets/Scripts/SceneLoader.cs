@@ -92,6 +92,11 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("The Mine Lose Scene");
     }
+    public void FirstTimeLoadingHeaven()
+    {
+        FindObjectOfType<PlayerStats>().DimensionCrossed("Heaven");
+        SceneManager.LoadScene("Heaven Start Scene");
+    }
     public void LoadHeavenStartScene(bool crossDimension)
     {
         //makes you pay if you are crossing a dimension

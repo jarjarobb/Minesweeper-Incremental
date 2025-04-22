@@ -58,7 +58,7 @@ public class Cutscene : MonoBehaviour
         text.text = "Heaven";
         fadeInText = true;
         yield return new WaitForSeconds(waitTimeBetweenActions);
-        FindObjectOfType<SceneLoader>().LoadHeavenStartScene(false);
+        FindObjectOfType<SceneLoader>().FirstTimeLoadingHeaven();
         fadeOutText = true;
         fadeOutBackground = true;
     }
