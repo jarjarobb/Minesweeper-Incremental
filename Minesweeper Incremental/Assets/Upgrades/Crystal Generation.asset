@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9ecfb128a3b69c4ea3c59e1396579d2, type: 3}
-  m_Name: Crystals PPS
+  m_Name: Crystal Generation
   m_EditorClassIdentifier: 
-  description: Crystals are now based off of squares revealed instead of percentage
-    of squares revealed. Unlocks a new upgrade.
-  currencyNeeded: crystals
+  description: Generates 1% of crystals per level per second, up to 10%. Requires
+    crystals on win to have at least 100 crystals in order to generate.
+  currencyNeeded: endgames
   level: 0
-  basePrice: 50
-  scaling: 1
+  basePrice: 10
+  scaling: 1.8
   effect: 0
   currencyAffected: 
   isMulti: 0
   isAdder: 0
-  levelCap: 1
-  notResetOnEndgame: 0
+  levelCap: 10
+  notResetOnEndgame: 1

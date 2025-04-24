@@ -491,7 +491,11 @@ MonoBehaviour:
     Flag - Right click cell
 
     Press Expand button on upgrade to see it''s details
-    and buy it'
+    and buy it
+
+    READ THE DESCRIPTIONS OF THE UPGRADES
+
+    that''s it'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 716da90b2147dd74dace531610528fca, type: 2}
   m_sharedMaterial: {fileID: 2881965052827732756, guid: 716da90b2147dd74dace531610528fca, type: 2}

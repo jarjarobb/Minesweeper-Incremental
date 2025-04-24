@@ -54,7 +54,8 @@ public class PlayerStats : MonoBehaviour
     int baseCoins = 1;
     [SerializeField] List<float> additiveMultis;
     [SerializeField] TextMeshProUGUI endgameDisplay;
-    int coinsOnWin;
+    BigInteger coinsOnWin;
+    BigInteger crystalsOnWin;
 
     //Creates the Singleton
     private void Awake()
@@ -204,6 +205,7 @@ public class PlayerStats : MonoBehaviour
             }
         }
         StartCoroutine(GenerateCoins());
+        StartCoroutine(GenerateCrystals());
     }
     // enables EL (everlasting) on a certain currency
     public void EnableEL(string currency)
@@ -539,7 +541,8 @@ public class PlayerStats : MonoBehaviour
                         float totalSquares = Mathf.Pow((float)(5 + upgrade.GetLevel()), 2f);
                         int bombs = 3 + 2 * upgrade.GetLevel();     
                         float totalNonBombSquares = totalSquares - bombs;
-                        coinsOnWin = Mathf.RoundToInt((float)baseCoins * ((1 + (float)baseAdditiveMulti) * (float)coinsMultis) * (float)totalNonBombSquares);
+                        GetEffectMulti("coins");
+                        coinsOnWin = (BigInteger)((float)baseCoins * ((1 + (float)baseAdditiveMulti) * (float)coinsMultis) * (float)totalNonBombSquares);
                         break;
                     }
                 }
@@ -554,6 +557,81 @@ public class PlayerStats : MonoBehaviour
             }
             yield return new WaitForSeconds(1);
         }
+    }
+    private IEnumerator GenerateCrystals()
+    {
+        while (true)
+        {
+            if (crystalsPPS)
+            {
+                foreach (Upgrade upgrade in upgrades)
+                {
+                    if (upgrade.name == "Bigger Field II")
+                    {
+
+                        float totalSquares = Mathf.Pow((float)(5 + upgrade.GetLevel()), 2f);
+                        int bombs = 3 + 2 * upgrade.GetLevel();     
+                        float totalNonBombSquares = totalSquares - bombs;
+                        GetEffectMulti("crystals");
+                        crystalsOnWin = (BigInteger)((float)baseCoins * ((1 + (float)baseAdditiveMulti) * (float)coinsMultis) * (float)totalNonBombSquares);
+                        break;
+                    }
+                }
+                foreach (Upgrade upgrade in upgrades)
+                {
+                    if (upgrade.name == "Crystal Generation")
+                    {
+                        crystals += (BigInteger)((float)crystalsOnWin / 100 * upgrade.GetLevel());
+                        UpdateDisplay(false, false);
+                    }
+                }
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+    public void EndgameReset()
+    {
+        
+        
+        foreach (Upgrade upgrade in upgrades)
+        {
+            if (upgrade.name == "Endgame")
+            {
+                print("endgame upgrade found");
+                if (upgrade.GetLevel() >= 1)
+                {
+                    AddEndgameTokens(upgrade.GetLevel());
+                }
+            }
+            if (!upgrade.GetNotResetOnEndgame())
+            {
+                upgrade.ResetLevel();
+            }
+        }
+
+
+        coins = 0;
+        crystals = 0;
+        diamonds = 0;
+        clouds = 0;
+        DisableEL();
+        DisablePPS();
+        FindObjectOfType<Unlocks>().EndgamePerformed();
+        IncreaseEndgame();
+        StartCoroutine(FindObjectOfType<Cutscene>().EndgameCutscene(endgame));
+        UpdateDisplay(false, false);
+
+    }
+    public void DisableEL()
+    {
+        coinsEL = false;
+        crystalsEL = false;
+    }
+    public void DisablePPS()
+    {
+        coinsProfitPerSquare = false;
+        crystalsPPS = false;
+        cloudsPPS = false;
     }
     public void AddEndgameTokens(int amount)
     {
